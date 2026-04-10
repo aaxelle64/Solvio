@@ -1,35 +1,39 @@
 ---
 const services = [
   {
-    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <path d="M4 11h3l2.5-7 3 14 2.5-7H19" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`,
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11h3l2.5-7 3 14 2.5-7H19" stroke="#00F0C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
     label: 'Automatisation',
     title: 'Automatisation de workflows',
     description: 'Connectez vos outils, éliminez les tâches répétitives et créez des flux de travail qui s\'exécutent sans intervention humaine — 24h/24, 7j/7.',
     tags: ['Make', 'Zapier', 'n8n', 'API REST'],
+    accent: 'teal',
+    price: 'À partir de 2 500 €',
   },
   {
-    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <circle cx="11" cy="11" r="3" stroke="#00C8A0" stroke-width="1.5"/>
-      <path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.93 4.93l1.41 1.41M15.66 15.66l1.41 1.41M4.93 17.07l1.41-1.41M15.66 6.34l1.41-1.41" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>`,
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="3" stroke="#4E8FFF" stroke-width="1.5"/><path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.93 4.93l1.41 1.41M15.66 15.66l1.41 1.41M4.93 17.07l1.41-1.41M15.66 6.34l1.41-1.41" stroke="#4E8FFF" stroke-width="1.5" stroke-linecap="round"/></svg>`,
     label: 'Intelligence artificielle',
     title: 'Intégrations IA',
     description: 'Déployez des agents IA, connectez des LLM à vos processus métier et créez des automatisations intelligentes qui s\'adaptent à votre contexte.',
     tags: ['GPT-4', 'Claude', 'RAG', 'Agents'],
+    accent: 'blue',
+    price: 'À partir de 4 000 €',
   },
   {
-    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <path d="M9 11l2 2 4-4" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M5 3h12a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#00C8A0" stroke-width="1.5"/>
-    </svg>`,
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M9 11l2 2 4-4" stroke="#9B5CF5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 3h12a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#9B5CF5" stroke-width="1.5"/></svg>`,
     label: 'Conseil',
     title: 'Audit & Conseil',
     description: 'Identifiez vos goulets d\'étranglement, priorisez les automatisations à fort ROI et définissez la feuille de route qui transforme votre organisation.',
     tags: ['Audit', 'Stratégie', 'ROI', 'Roadmap'],
+    accent: 'purple',
+    price: 'À partir de 1 200 €',
   },
 ];
+
+const accentColors: Record<string, string> = {
+  teal:   '#00F0C0',
+  blue:   '#4E8FFF',
+  purple: '#9B5CF5',
+};
 ---
 
 <section class="section" id="services">
@@ -42,18 +46,17 @@ const services = [
     </div>
 
     <div class="services-grid">
-      {services.map((s, i) => (
-        <article class="service-card">
+      {services.map((s) => (
+        <article class:list={['service-card-colored', `accent-${s.accent}`]}>
           <div class="card-top">
-            <div class="card-icon" set:html={s.icon} />
-            <span class="label-caps" style="color: var(--color-text-muted)">{s.label}</span>
+            <div class="card-icon" set:html={s.icon} style={`--icon-color: ${accentColors[s.accent]}`} />
+            <span class="card-price">{s.price}</span>
           </div>
+          <div class="card-label">{s.label}</div>
           <h3>{s.title}</h3>
           <p>{s.description}</p>
           <div class="card-tags">
-            {s.tags.map(tag => (
-              <span class="tag">{tag}</span>
-            ))}
+            {s.tags.map(tag => <span class="tag">{tag}</span>)}
           </div>
         </article>
       ))}
@@ -71,79 +74,102 @@ const services = [
 }
 .section-header .label-caps { margin-bottom: 1rem; display: block; }
 .section-header h2 { margin-bottom: 1rem; }
-.section-header p  { color: var(--color-text-secondary); }
+.section-header p { color: var(--color-text-secondary); }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--color-border);
-  border: 0.5px solid var(--color-border);
-  border-radius: 16px;
-  overflow: hidden;
+  gap: 1.25rem;
 }
 
-.service-card {
+.service-card-colored {
   background: var(--color-surface);
-  border: none;
-  border-radius: 0;
+  border: 0.5px solid var(--color-border);
+  border-radius: 16px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: background 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.service-card:hover {
-  background: rgba(13, 17, 32, 0.6);
-  border-color: transparent;
+
+.service-card-colored::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
 }
-.service-card:first-child { border-radius: 16px 0 0 16px; }
-.service-card:last-child  { border-radius: 0 16px 16px 0; }
+
+.accent-teal::before  { background: linear-gradient(90deg, transparent, #00F0C0, transparent); }
+.accent-blue::before  { background: linear-gradient(90deg, transparent, #4E8FFF, transparent); }
+.accent-purple::before { background: linear-gradient(90deg, transparent, #9B5CF5, transparent); }
+
+.service-card-colored:hover { transform: translateY(-4px); }
+.accent-teal:hover   { box-shadow: 0 8px 32px rgba(0, 240, 192, 0.12); border-color: rgba(0, 240, 192, 0.25); }
+.accent-blue:hover   { box-shadow: 0 8px 32px rgba(78, 143, 255, 0.12); border-color: rgba(78, 143, 255, 0.25); }
+.accent-purple:hover { box-shadow: 0 8px 32px rgba(155, 92, 245, 0.12); border-color: rgba(155, 92, 245, 0.25); }
 
 .card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .card-icon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 200, 160, 0.08);
-  border-radius: 8px;
-  border: 0.5px solid rgba(0, 200, 160, 0.15);
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  border: 0.5px solid rgba(255,255,255,0.08);
 }
 
-.service-card h3 { font-size: 1.0625rem; line-height: 1.3; }
-.service-card p  { font-size: 0.875rem; color: var(--color-text-secondary); flex: 1; }
-
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
+.card-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
 }
+
+.card-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.accent-teal   .card-label { color: rgba(0, 240, 192, 0.6); }
+.accent-blue   .card-label { color: rgba(78, 143, 255, 0.6); }
+.accent-purple .card-label { color: rgba(155, 92, 245, 0.6); }
+
+.service-card-colored h3 { font-size: 1.0625rem; }
+.service-card-colored p  { font-size: 0.875rem; color: var(--color-text-secondary); flex: 1; }
+
+.card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
 
 .tag {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.6875rem;
   color: var(--color-text-muted);
-  background: rgba(28, 34, 56, 0.6);
+  background: rgba(255,255,255,0.04);
   border: 0.5px solid var(--color-border);
   border-radius: 4px;
   padding: 3px 8px;
 }
 
 @media (max-width: 900px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 1px;
-  }
-  .service-card:first-child { border-radius: 16px 16px 0 0; }
-  .service-card:last-child  { border-radius: 0 0 16px 16px; }
+  .services-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 640px) and (max-width: 900px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .service-card-colored:last-child { grid-column: 1 / -1; }
 }
 </style>
