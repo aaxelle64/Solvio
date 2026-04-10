@@ -1,0 +1,248 @@
+---
+---
+
+<section class="section roi-section">
+  <div class="container">
+    <div class="roi-inner">
+
+      <div class="roi-header">
+        <span class="label-caps">Calculateur ROI</span>
+        <h2>Combien perdez-vous<br /><em class="gradient-text">chaque mois ?</em></h2>
+        <p>Déplacez les curseurs et voyez votre perte réelle en temps réel.</p>
+      </div>
+
+      <div class="roi-card">
+
+        <div class="sliders">
+          <div class="slider-group">
+            <label for="slider-heures">
+              <span>⏱ Heures/semaine sur les tâches répétitives</span>
+              <span class="slider-val"><span id="val-heures">8</span>h</span>
+            </label>
+            <input type="range" min="1" max="30" value="8" id="slider-heures" />
+          </div>
+
+          <div class="slider-group">
+            <label for="slider-collab">
+              <span>👥 Collaborateurs concernés</span>
+              <span class="slider-val"><span id="val-collab">2</span></span>
+            </label>
+            <input type="range" min="1" max="10" value="2" id="slider-collab" />
+          </div>
+
+          <div class="slider-group">
+            <label for="slider-taux">
+              <span>💶 Coût horaire moyen d'un collaborateur</span>
+              <span class="slider-val"><span id="val-taux">45</span>€/h</span>
+            </label>
+            <input type="range" min="20" max="150" value="45" step="5" id="slider-taux" />
+          </div>
+        </div>
+
+        <div class="roi-results">
+          <div class="result-card result-lost">
+            <div class="result-value" id="res-perdu">1 440€</div>
+            <div class="result-label">perdus / mois</div>
+          </div>
+          <div class="result-card result-solvio">
+            <div class="result-value" id="res-solvio">800€</div>
+            <div class="result-label">Solvio / mois</div>
+          </div>
+          <div class="result-card result-gain">
+            <div class="result-value" id="res-gain">+640€</div>
+            <div class="result-label">gain net / mois</div>
+          </div>
+        </div>
+
+        <div class="roi-message" id="roi-message"></div>
+
+        <a href="/contact" class="btn-primary roi-cta">
+          Calculer mon plan sur mesure →
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.roi-section {
+  background: var(--color-surface);
+  border-top: 0.5px solid var(--color-border);
+  border-bottom: 0.5px solid var(--color-border);
+}
+
+.roi-inner { max-width: 720px; margin-inline: auto; }
+
+.roi-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.roi-header .label-caps { display: block; margin-bottom: 1rem; }
+.roi-header h2 { margin-bottom: 0.875rem; }
+.roi-header em { font-style: italic; }
+.roi-header p { color: var(--color-text-secondary); }
+
+.roi-card {
+  background: rgba(6, 12, 26, 0.7);
+  border: 0.5px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.roi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,240,192,0.5), rgba(78,143,255,0.5), transparent);
+}
+
+/* Sliders */
+.sliders { display: flex; flex-direction: column; gap: 1.75rem; margin-bottom: 2.5rem; }
+
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: rgba(237, 242, 255, 0.7);
+  font-weight: 400;
+}
+
+.slider-val {
+  color: var(--color-teal);
+  font-size: 1rem;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  background: var(--color-border);
+  accent-color: var(--color-teal);
+  border: none;
+  padding: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  box-shadow: 0 0 8px rgba(0, 240, 192, 0.5);
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+/* Results */
+.roi-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-card {
+  border-radius: 14px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.result-lost {
+  background: rgba(255, 107, 107, 0.08);
+  border: 0.5px solid rgba(255, 107, 107, 0.2);
+}
+.result-lost .result-value { color: #FF6B6B; }
+
+.result-solvio {
+  background: rgba(0, 240, 192, 0.07);
+  border: 0.5px solid rgba(0, 240, 192, 0.2);
+}
+.result-solvio .result-value { color: var(--color-teal); }
+
+.result-gain {
+  background: rgba(78, 143, 255, 0.08);
+  border: 0.5px solid rgba(78, 143, 255, 0.2);
+}
+.result-gain .result-value { color: var(--color-blue); }
+
+.result-value {
+  font-family: Georgia, serif;
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.result-label {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* Message */
+.roi-message {
+  background: rgba(0, 240, 192, 0.06);
+  border: 0.5px solid rgba(0, 240, 192, 0.18);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  min-height: 60px;
+}
+
+.roi-cta {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 24px;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 600px) {
+  .roi-card { padding: 1.5rem; }
+  .roi-results { grid-template-columns: 1fr; }
+  .slider-group label { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+}
+</style>
+
+<script>
+function calcROI() {
+  const h = parseInt((document.getElementById('slider-heures') as HTMLInputElement).value);
+  const c = parseInt((document.getElementById('slider-collab') as HTMLInputElement).value);
+  const t = parseInt((document.getElementById('slider-taux') as HTMLInputElement).value);
+
+  (document.getElementById('val-heures') as HTMLElement).textContent = String(h);
+  (document.getElementById('val-collab') as HTMLElement).textContent = String(c);
+  (document.getElementById('val-taux') as HTMLElement).textContent = String(t);
+
+  const perdu = Math.round(h * 4.3 * c * t);
+  const solvio = 800;
+  const gain = perdu - solvio;
+
+  (document.getElementById('res-perdu') as HTMLElement).textContent =
+    perdu.toLocaleString('fr-FR') + '€';
+  (document.getElementById('res-gain') as HTMLElement).textContent =
+    (gain > 0 ? '+' : '') + gain.toLocaleString('fr-FR') + '€';
+
+  const roi = Math.round((perdu / solvio) * 100);
+  const economie = Math.round(perdu * 0.8);
+
+  (document.getElementById('roi-message') as HTMLElement).innerHTML =
+    `Votre équipe perd <strong style="color:#FF6B6B">${perdu.toLocaleString('fr-FR')}€/mois</strong> en productivité sur des tâches automatisables. Solvio coûte <strong style="color:#00F0C0">800€/mois</strong> et vous fait économiser jusqu'à <strong style="color:#EDF2FF">${economie.toLocaleString('fr-FR')}€</strong>. ROI estimé : <strong style="color:#00F0C0">${roi}%</strong>.`;
+}
+
+calcROI();
+
+document.getElementById('slider-heures')?.addEventListener('input', calcROI);
+document.getElementById('slider-collab')?.addEventListener('input', calcROI);
+document.getElementById('slider-taux')?.addEventListener('input', calcROI);
+</script>
