@@ -1,0 +1,126 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Analyse',
+    description: 'Nous cartographions vos processus, identifions les frictions et calculons le potentiel d\'automatisation de chaque tâche.',
+  },
+  {
+    number: '02',
+    title: 'Design',
+    description: 'Nous concevons l\'architecture de vos workflows, choisissons les outils adaptés et validons l\'approche avec votre équipe.',
+  },
+  {
+    number: '03',
+    title: 'Déploiement',
+    description: 'Nous construisons, testons et mettons en production vos automatisations — avec documentation et transfert de compétences.',
+  },
+  {
+    number: '04',
+    title: 'Suivi',
+    description: 'Nous monitorons les performances, corrigeons les anomalies et faisons évoluer les systèmes selon vos besoins.',
+  },
+];
+---
+
+<section class="section process-section">
+  <div class="container">
+
+    <div class="process-header">
+      <span class="label-caps">Notre méthode</span>
+      <h2>De l'idée à la mise<br />en production.</h2>
+    </div>
+
+    <div class="steps">
+      {steps.map((step, i) => (
+        <div class="step">
+          <div class="step-left">
+            <span class="step-number">{step.number}</span>
+            {i < steps.length - 1 && (
+              <div class="step-line" aria-hidden="true"></div>
+            )}
+          </div>
+          <div class="step-body">
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.process-section {
+  background: var(--color-surface);
+  border-top: 0.5px solid var(--color-border);
+  border-bottom: 0.5px solid var(--color-border);
+}
+
+.process-header {
+  max-width: 480px;
+  margin-bottom: 4rem;
+}
+.process-header .label-caps { display: block; margin-bottom: 1rem; }
+.process-header h2 { font-size: clamp(1.875rem, 3.5vw, 2.5rem); }
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 680px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+}
+
+.step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.step-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--color-teal);
+  letter-spacing: 1px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid rgba(0, 200, 160, 0.25);
+  border-radius: 6px;
+  background: rgba(0, 200, 160, 0.06);
+  flex-shrink: 0;
+}
+
+.step-line {
+  flex: 1;
+  width: 0.5px;
+  background: var(--color-border);
+  margin-block: 0.5rem;
+  min-height: 2rem;
+}
+
+.step-body {
+  padding-bottom: 2.5rem;
+}
+.step:last-child .step-body { padding-bottom: 0; }
+
+.step-body h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.step-body p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+</style>

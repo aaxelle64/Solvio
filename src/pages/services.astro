@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import CTABanner from '../components/sections/CTABanner.astro';
+
+const services = [
+  {
+    number: '01',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12h4l3-9 4 18 3-9h4" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: 'Automatisation de workflows',
+    tagline: 'Vos opérations tournent seules.',
+    description: 'Nous analysons vos processus opérationnels, identifions les répétitions et créons des workflows automatisés qui s\'exécutent sans intervention humaine.',
+    features: [
+      'Audit des processus et cartographie des flux',
+      'Conception et déploiement de workflows sur Make, n8n ou Zapier',
+      'Connexion entre vos outils (CRM, ERP, outils métier)',
+      'Gestion d\'erreurs, alertes et monitoring',
+      'Documentation et formation de votre équipe',
+    ],
+    tools: ['Make', 'n8n', 'Zapier', 'Airtable', 'Notion', 'HubSpot'],
+    price: 'À partir de 2 500 €',
+  },
+  {
+    number: '02',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.5" stroke="#4E7FFF" stroke-width="1.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5.64 5.64l1.42 1.42M16.95 16.95l1.41 1.41M5.64 18.36l1.42-1.42M16.95 7.05l1.41-1.41" stroke="#4E7FFF" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    title: 'Intégrations IA',
+    tagline: 'L\'intelligence artificielle dans votre coeur de métier.',
+    description: 'Nous intégrons des modèles de langage et des agents IA dans vos workflows existants — pour automatiser des tâches cognitives complexes que les outils classiques ne peuvent pas gérer.',
+    features: [
+      'Déploiement d\'agents IA adaptés à votre contexte',
+      'Intégration de LLM (GPT-4, Claude) dans vos processus',
+      'Systèmes RAG sur votre base documentaire',
+      'Extraction de données et traitement de documents non structurés',
+      'Chatbots et assistants internes sur-mesure',
+    ],
+    tools: ['OpenAI', 'Claude API', 'LangChain', 'Pinecone', 'Supabase'],
+    price: 'À partir de 4 000 €',
+    accent: 'blue',
+  },
+  {
+    number: '03',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#00C8A0" stroke-width="1.5"/></svg>`,
+    title: 'Audit & Conseil',
+    tagline: 'Savoir où agir avant d\'agir.',
+    description: 'Avant d\'automatiser, encore faut-il savoir quoi automatiser. Notre audit vous livre une vision claire de vos process, de leur potentiel d\'optimisation et du ROI attendu.',
+    features: [
+      'Analyse des processus métier existants',
+      'Identification des frictions et opportunités d\'automatisation',
+      'Calcul du ROI et priorisation par impact',
+      'Feuille de route d\'automatisation à 6–12 mois',
+      'Recommandations tooling et architecture',
+    ],
+    tools: ['Miro', 'Notion', 'Loom', 'Figma'],
+    price: 'À partir de 1 200 €',
+  },
+];
+---
+
+<BaseLayout
+  title="Services — Solvio"
+  description="Découvrez les trois offres de Solvio : automatisation de workflows, intégrations IA et audit conseil."
+>
+  <Header />
+  <main>
+
+    <!-- Page Header -->
+    <section class="page-header section">
+      <div class="container">
+        <span class="label-caps">Nos services</span>
+        <h1>Des solutions qui<br />s'adaptent à votre réalité.</h1>
+        <p class="page-sub">
+          Trois offres complémentaires, une seule obsession : vous faire gagner du temps et de l'argent en automatisant intelligemment.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Detail -->
+    {services.map((s, i) => (
+      <section class:list={['service-detail section', { 'service-alt': i % 2 === 1 }]}>
+        <div class="container">
+          <div class="service-detail-inner">
+
+            <div class="service-detail-meta">
+              <div class="service-number">{s.number}</div>
+              <div class="service-icon" set:html={s.icon} />
+            </div>
+
+            <div class="service-detail-content">
+              <span class="label-caps" style={s.accent === 'blue' ? 'color: var(--color-blue)' : ''}>
+                {s.title}
+              </span>
+              <h2>{s.tagline}</h2>
+              <p class="service-desc">{s.description}</p>
+
+              <ul class="feature-list" role="list">
+                {s.features.map(f => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M2 7l3.5 3.5L12 3" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="service-footer">
+                <div class="service-tools">
+                  <span class="label-caps" style="color: var(--color-text-muted)">Outils</span>
+                  <div class="tools-list">
+                    {s.tools.map(t => <span class="tool-tag">{t}</span>)}
+                  </div>
+                </div>
+                <div class="service-price">
+                  <span class="price-label label-caps">Investissement</span>
+                  <span class="price-value">{s.price}</span>
+                </div>
+              </div>
+
+              <a href="/contact" class="btn-primary" style="margin-top: 1.5rem; width: fit-content">
+                Discuter de mon projet →
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <CTABanner />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+.page-header {
+  border-bottom: 0.5px solid var(--color-border);
+  padding-bottom: 4rem;
+}
+.page-header .label-caps { display: block; margin-bottom: 1.25rem; }
+.page-header h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); margin-bottom: 1.25rem; }
+.page-sub {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+}
+
+.service-detail {
+  border-bottom: 0.5px solid var(--color-border);
+}
+.service-alt {
+  background: var(--color-surface);
+}
+
+.service-detail-inner {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2.5rem;
+}
+
+.service-detail-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.service-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 200, 160, 0.07);
+  border: 0.5px solid rgba(0, 200, 160, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-detail-content .label-caps { display: block; margin-bottom: 0.75rem; }
+.service-detail-content h2 {
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  margin-bottom: 1rem;
+}
+.service-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin-bottom: 1.75rem;
+}
+
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+.feature-list svg { flex-shrink: 0; margin-top: 2px; }
+
+.service-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem;
+  background: var(--color-abyss);
+  border: 0.5px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.service-tools { display: flex; flex-direction: column; gap: 0.5rem; }
+.service-tools .label-caps { margin-bottom: 0; }
+.tools-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tool-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  background: rgba(28, 34, 56, 0.8);
+  border: 0.5px solid var(--color-border);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.service-price { display: flex; flex-direction: column; gap: 0.4rem; text-align: right; flex-shrink: 0; }
+.price-label { margin-bottom: 0; }
+.price-value {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 640px) {
+  .service-detail-inner { grid-template-columns: 1fr; }
+  .service-detail-meta { flex-direction: row; }
+  .service-footer { flex-direction: column; align-items: flex-start; }
+  .service-price { text-align: left; }
+}
+</style>

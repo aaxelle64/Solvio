@@ -1,0 +1,338 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+const FORMSPREE_ID = import.meta.env.FORMSPREE_ID ?? 'YOUR_FORM_ID';
+---
+
+<BaseLayout
+  title="Contact — Solvio"
+  description="Contactez Solvio pour discuter de votre projet d'automatisation. Réponse sous 24h."
+>
+  <Header />
+  <main>
+
+    <section class="section contact-section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- Left: info -->
+          <div class="contact-info">
+            <span class="label-caps">Parlons-nous</span>
+            <h1>Un projet en tête ?<br />On vous répond sous 24h.</h1>
+            <p>
+              Décrivez-nous votre besoin, même flou. On est là pour clarifier, cadrer et proposer l'approche adaptée à votre situation.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M9 1.5C5.96 1.5 3.5 3.96 3.5 7c0 4.5 5.5 9.5 5.5 9.5s5.5-5 5.5-9.5C14.5 3.96 12.04 1.5 9 1.5zm0 7.5a2 2 0 110-4 2 2 0 010 4z" stroke="#00C8A0" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Paris, France — Remote friendly</span>
+              </div>
+              <div class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M3 4h12a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="#00C8A0" stroke-width="1.2" stroke-linecap="round"/>
+                  <path d="M2 5l7 5 7-5" stroke="#00C8A0" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a href="mailto:hello@solvio.fr">hello@solvio.fr</a>
+              </div>
+            </div>
+
+            <div class="contact-promise">
+              <div class="promise-item">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M2 7l3.5 3.5L12 3" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Réponse sous 24h ouvrées</span>
+              </div>
+              <div class="promise-item">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M2 7l3.5 3.5L12 3" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Appel découverte gratuit 30 min</span>
+              </div>
+              <div class="promise-item">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M2 7l3.5 3.5L12 3" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Sans engagement ni pression commerciale</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: form -->
+          <div class="contact-form-wrap">
+            <form
+              id="contact-form"
+              action={`https://formspree.io/f/${FORMSPREE_ID}`}
+              method="POST"
+              class="contact-form"
+              novalidate
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Nom complet <span aria-hidden="true">*</span></label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Jean Dupont"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email professionnel <span aria-hidden="true">*</span></label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="jean@entreprise.fr"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="company">Entreprise</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  placeholder="Nom de votre entreprise"
+                  autocomplete="organization"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="service">Ce qui vous intéresse</label>
+                <select id="service" name="service">
+                  <option value="">Choisir une offre…</option>
+                  <option value="automation">Automatisation de workflows</option>
+                  <option value="ai">Intégrations IA</option>
+                  <option value="audit">Audit & Conseil</option>
+                  <option value="other">Autre / Je ne sais pas encore</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Décrivez votre besoin <span aria-hidden="true">*</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Quels sont vos processus les plus chronophages ? Quels outils utilisez-vous ? Quel est votre objectif ?"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary submit-btn">
+                Envoyer ma demande
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <p class="form-note">
+                Vos données sont utilisées uniquement pour vous répondre et ne sont jamais revendues.
+              </p>
+            </form>
+
+            <!-- Success state (hidden by default) -->
+            <div class="form-success" id="form-success" aria-live="polite" hidden>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <circle cx="20" cy="20" r="19" stroke="#00C8A0" stroke-width="1"/>
+                <path d="M12 20l5.5 5.5L28 14" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h3>Message envoyé !</h3>
+              <p>Merci pour votre message. Nous vous répondrons dans les 24 heures ouvrées.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-info .label-caps { display: block; margin-bottom: 1.25rem; }
+.contact-info h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 1.25rem;
+}
+.contact-info > p {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+.contact-item a {
+  color: var(--color-teal);
+  transition: opacity 0.15s;
+}
+.contact-item a:hover { opacity: 0.8; }
+
+.contact-promise {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.promise-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+/* Form */
+.contact-form-wrap {
+  background: var(--color-surface);
+  border: 0.5px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+label span { color: var(--color-teal); }
+
+input, select, textarea {
+  background: var(--color-abyss);
+  border: 0.5px solid var(--color-border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  transition: border-color 0.15s ease;
+  outline: none;
+  width: 100%;
+}
+input::placeholder, textarea::placeholder {
+  color: var(--color-text-muted);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(0, 200, 160, 0.4);
+}
+select { cursor: pointer; }
+select option { background: var(--color-surface); }
+textarea { resize: vertical; min-height: 120px; }
+
+.submit-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+}
+
+.form-note {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Success state */
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+.form-success h3 { font-size: 1.25rem; }
+.form-success p { color: var(--color-text-secondary); font-size: 0.875rem; }
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+const form = document.getElementById('contact-form') as HTMLFormElement | null;
+const successEl = document.getElementById('form-success');
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  const submitBtn = form.querySelector('[type="submit"]') as HTMLButtonElement;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Envoi en cours…';
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' },
+    });
+
+    if (res.ok) {
+      form.hidden = true;
+      if (successEl) successEl.hidden = false;
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Réessayer';
+      alert('Une erreur est survenue. Veuillez réessayer ou nous écrire directement à hello@solvio.fr');
+    }
+  } catch {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Réessayer';
+  }
+});
+</script>

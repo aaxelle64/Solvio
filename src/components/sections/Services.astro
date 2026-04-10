@@ -1,0 +1,149 @@
+---
+const services = [
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <path d="M4 11h3l2.5-7 3 14 2.5-7H19" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+    label: 'Automatisation',
+    title: 'Automatisation de workflows',
+    description: 'Connectez vos outils, éliminez les tâches répétitives et créez des flux de travail qui s\'exécutent sans intervention humaine — 24h/24, 7j/7.',
+    tags: ['Make', 'Zapier', 'n8n', 'API REST'],
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="3" stroke="#00C8A0" stroke-width="1.5"/>
+      <path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.93 4.93l1.41 1.41M15.66 15.66l1.41 1.41M4.93 17.07l1.41-1.41M15.66 6.34l1.41-1.41" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`,
+    label: 'Intelligence artificielle',
+    title: 'Intégrations IA',
+    description: 'Déployez des agents IA, connectez des LLM à vos processus métier et créez des automatisations intelligentes qui s\'adaptent à votre contexte.',
+    tags: ['GPT-4', 'Claude', 'RAG', 'Agents'],
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <path d="M9 11l2 2 4-4" stroke="#00C8A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 3h12a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#00C8A0" stroke-width="1.5"/>
+    </svg>`,
+    label: 'Conseil',
+    title: 'Audit & Conseil',
+    description: 'Identifiez vos goulets d\'étranglement, priorisez les automatisations à fort ROI et définissez la feuille de route qui transforme votre organisation.',
+    tags: ['Audit', 'Stratégie', 'ROI', 'Roadmap'],
+  },
+];
+---
+
+<section class="section" id="services">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="label-caps">Ce que nous faisons</span>
+      <h2>Une offre pensée<br />pour aller vite.</h2>
+      <p>Trois piliers complémentaires pour transformer vos opérations de fond en comble.</p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s, i) => (
+        <article class="service-card">
+          <div class="card-top">
+            <div class="card-icon" set:html={s.icon} />
+            <span class="label-caps" style="color: var(--color-text-muted)">{s.label}</span>
+          </div>
+          <h3>{s.title}</h3>
+          <p>{s.description}</p>
+          <div class="card-tags">
+            {s.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.section-header {
+  text-align: center;
+  max-width: 560px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+}
+.section-header .label-caps { margin-bottom: 1rem; display: block; }
+.section-header h2 { margin-bottom: 1rem; }
+.section-header p  { color: var(--color-text-secondary); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 0.5px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.service-card {
+  background: var(--color-surface);
+  border: none;
+  border-radius: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: background 0.2s ease;
+}
+.service-card:hover {
+  background: rgba(13, 17, 32, 0.6);
+  border-color: transparent;
+}
+.service-card:first-child { border-radius: 16px 0 0 16px; }
+.service-card:last-child  { border-radius: 0 16px 16px 0; }
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 200, 160, 0.08);
+  border-radius: 8px;
+  border: 0.5px solid rgba(0, 200, 160, 0.15);
+}
+
+.service-card h3 { font-size: 1.0625rem; line-height: 1.3; }
+.service-card p  { font-size: 0.875rem; color: var(--color-text-secondary); flex: 1; }
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  background: rgba(28, 34, 56, 0.6);
+  border: 0.5px solid var(--color-border);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+  .service-card:first-child { border-radius: 16px 16px 0 0; }
+  .service-card:last-child  { border-radius: 0 0 16px 16px; }
+}
+</style>

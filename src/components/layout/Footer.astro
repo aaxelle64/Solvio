@@ -1,0 +1,112 @@
+---
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'Services',  href: '/services' },
+  { label: 'À propos',  href: '/about' },
+  { label: 'Contact',   href: '/contact' },
+];
+---
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="Solvio">Solvio</a>
+        <p>Automatisez ce qui vous freine.<br />Scalez ce qui vous définit.</p>
+      </div>
+
+      <nav aria-label="Liens de navigation du pied de page">
+        <ul role="list">
+          {links.map(l => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <p class="label-caps">Contact</p>
+        <a href="mailto:hello@solvio.fr">hello@solvio.fr</a>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="footer-bottom">
+      <p>© {year} Solvio. Tous droits réservés.</p>
+      <a href="/mentions-legales">Mentions légales</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+footer {
+  background: var(--color-surface);
+  border-top: 0.5px solid var(--color-border);
+  padding-block: 3.5rem 2rem;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+
+.logo {
+  font-family: Georgia, serif;
+  font-size: 1.375rem;
+  letter-spacing: -1.5px;
+  color: var(--color-text-primary);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+nav a {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  transition: color 0.15s;
+}
+nav a:hover { color: var(--color-text-primary); }
+
+.footer-contact { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-contact a {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  transition: color 0.15s;
+}
+.footer-contact a:hover { color: var(--color-teal); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+}
+.footer-bottom p,
+.footer-bottom a {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+.footer-bottom a:hover { color: var(--color-text-secondary); }
+
+@media (max-width: 640px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+</style>
