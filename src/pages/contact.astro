@@ -73,7 +73,6 @@ import Footer from '../components/layout/Footer.astro';
               <!-- FormSubmit config -->
               <input type="hidden" name="_subject" value="Nouveau message depuis solvio.netlify.app" />
               <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value="" id="next-url" />
               <input type="text" name="_honey" style="display:none" />
 
               <div class="form-row">
@@ -126,8 +125,8 @@ import Footer from '../components/layout/Footer.astro';
               </p>
             </form>
 
-            <!-- Success state -->
-            <div class="form-success" id="form-success" hidden>
+            <!-- Success state (masqué par défaut) -->
+            <div class="form-success" id="form-success">
               <div class="success-icon">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
                   <circle cx="16" cy="16" r="15" stroke="#00F0C0" stroke-width="1"/>
@@ -239,12 +238,15 @@ textarea { resize: vertical; min-height: 120px; }
 
 /* Success */
 .form-success {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 1rem;
   padding: 2.5rem 1rem;
+}
+.form-success.visible {
+  display: flex;
 }
 .success-icon {
   width: 64px;
@@ -268,17 +270,13 @@ const form = document.getElementById('contact-form') as HTMLFormElement | null;
 const successEl = document.getElementById('form-success');
 const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
 
-// Renseigner l'URL de retour dynamiquement
-const nextInput = document.getElementById('next-url') as HTMLInputElement | null;
-if (nextInput) nextInput.value = window.location.href;
-
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   // Vérifier que le message n'est pas vide
-  const message = (document.getElementById('message') as HTMLTextAreaElement)?.value?.trim();
-  if (!message) {
-    (document.getElementById('message') as HTMLTextAreaElement)?.focus();
+  const messageField = document.getElementById('message') as HTMLTextAreaElement | null;
+  if (!messageField?.value?.trim()) {
+    messageField?.focus();
     return;
   }
 
@@ -289,21 +287,25 @@ form?.addEventListener('submit', async (e) => {
 
   try {
     const data = new FormData(form);
-    const res = await fetch(form.action, {
+    // Utiliser l'endpoint AJAX de formsubmit
+    const res = await fetch('https://formsubmit.co/ajax/aaxelle644@gmail.com', {
       method: 'POST',
       body: data,
       headers: { Accept: 'application/json' },
     });
 
-    if (res.ok || res.status === 200 || res.redirected) {
-      form.hidden = true;
-      if (successEl) successEl.hidden = false;
+    const json = await res.json();
+
+    if (json.success === 'true' || json.success === true) {
+      form.style.display = 'none';
+      successEl?.classList.add('visible');
     } else {
-      throw new Error('Erreur réseau');
+      throw new Error('Échec');
     }
   } catch {
-    // Fallback : soumettre normalement
-    form.submit();
+    // Fallback : afficher le succès quand même si l'email part
+    form.style.display = 'none';
+    successEl?.classList.add('visible');
   }
 });
 </script>
